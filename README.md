@@ -26,3 +26,12 @@ Now I can use on my development machine
 iex --name console@<local-ip> --remsh <node-name>@<ip-address> --cookie secret 
 ```
 
+## What is my development setup
+Well I am using vim on my mac. Since I am trying a lot of things depending on the hardware of the nerves box I did setup a raspberry pi with raspian an a full blown elixir stack. I connect to this box with ssh from my mac. Since I feel it more pleasent to use vim on the mac I just put an alias in my zsh.
+```sh
+alias push_rpi='rsync --progress -arv --exclude=".git" --exclude="_images" --exclude="_build" --exclude="deps" ~/nerves/project1/ root@raspi:~/project1'
+```
+So I can edit everything on the mac and just sent a :!push_rpi from vim an have it deployed to the development box.
+And when everything works I deploy it using bake to the nerves box 
+
+... To be continued
