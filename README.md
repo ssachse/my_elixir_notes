@@ -59,6 +59,6 @@ Interactive Elixir (1.2.2) - press Ctrl+C to exit (type h() ENTER for help)
 iex(observer@192.168.1.1)1> :observer.start
 :ok
 ```
-
+![screenshot](screenshots/nerves_observer.png "Description goes here")
 
 
