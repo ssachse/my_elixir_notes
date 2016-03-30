@@ -34,4 +34,31 @@ alias push_rpi='rsync --progress -arv --exclude=".git" --exclude="_images" --exc
 So I can edit everything on the mac and just sent a :!push_rpi from vim an have it deployed to the development box.
 And when everything works I deploy it using bake to the nerves box 
 
-... To be continued
+## How Do I use Erlang :observer on the nerves target ?
+Thanks to Justin Schneck it's really easy. On the development machine you start a hidden IEx session
+```elixir
+iex --name observer@<local-ip> --cookie secret
+```
+With the same cookie like on the nerves box
+On the nerves box you add
+```elixir
+def application do
+...
+  applications: [ ...
+                  :runtime_tools,
+                  ...
+                  ]
+ ...
+ end
+ ```
+ Now you can start Observer
+ ```elixir
+ Erlang/OTP 18 [erts-7.2.1] [source] [64-bit] [smp:8:8] [async-threads:10] [hipe] [kernel-poll:false] [dtrace]
+
+Interactive Elixir (1.2.2) - press Ctrl+C to exit (type h() ENTER for help)
+iex(observer@192.168.1.1)1> :observer.start
+:ok
+```
+
+
+
