@@ -66,30 +66,44 @@ iex(observer@192.168.1.1)1> :observer.start
 Thanks to Information from https://elixir-lang.slack.com/team/jschneck you do following
 
 On a linux VM (Ubuntu 14.04) 
-``` git clone https://github.com/nerves-project/nerves_system_br
+```sh
+git clone https://github.com/nerves-project/nerves_system_br
 ```
 install
-```sudo apt-get install git g++ libssl-dev libncurses5-dev bc m4 make unzip cmake
+```sh
+sudo apt-get install git g++ libssl-dev libncurses5-dev bc m4 make unzip cmake
 ```
-``` git clone https://github.com/nerves-project/nerves_system_bbb
+```sh 
+git clone https://github.com/nerves-project/nerves_system_bbb
 ```
 
 copy the linux config from nerves_system_br, for bbb located here https://github.com/nerves-project/nerves_system_br/board/bbb/linux-4.1.defconfig to nerves_system_bbb
-```cp board/bbb/linux-4.1.defconfig ../nerves_system_bbb
+```sh
+cp board/bbb/linux-4.1.defconfig ../nerves_system_bbb
 ```
 edit the line  https://github.com/nerves-project/nerves_system_rpi/blob/develop/nerves_defconfig#L30 to
-``` BR2_LINUX_KERNEL_CUSTOM_CONFIG_FILE="${NERVES_DEFCONFIG_DIR}/linux-4.1.defconfig" 
+```sh
+BR2_LINUX_KERNEL_CUSTOM_CONFIG_FILE="${NERVES_DEFCONFIG_DIR}/linux-4.1.defconfig" 
 ```
 in the linux defconfig, you are going to add `CONFIG_RTL8192CU=m
 And do
-``` ./create-build.sh ../nerves_system_bbb/nerves_defconfig ./bbb_build ```
+```sh
+./create-build.sh ../nerves_system_bbb/nerves_defconfig ./bbb_build 
+```
 
 Now generate the tar file that you can move and decompress somewhere on your mac.
-```cd ./bbb_build
+```sh
+cd ./bbb_build
 make system
 ```
 then from the nerves project do
-``` export NERVES_SYSTEM=/path/to/decompressed/system
+```sh
+export NERVES_SYSTEM=/path/to/decompressed/system
 mix firmware
 ```
 
+## How to inspect a long list
+
+```elixir
+File.ls("/lib/firmware") |> IO.inspect limit: :infinity
+```
