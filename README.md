@@ -84,5 +84,12 @@ in the linux defconfig, you are going to add `CONFIG_RTL8192CU=m
 And do
 ``` ./create-build.sh ../nerves_system_bbb/nerves_defconfig ./bbb_build ```
 
-
+Now generate the tar file that you can move and decompress somewhere on your mac.
+```cd ./bbb_build
+make system
+```
+then from the nerves project do
+``` export NERVES_SYSTEM=/path/to/decompressed/system
+mix firmware
+```
 
